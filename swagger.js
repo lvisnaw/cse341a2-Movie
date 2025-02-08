@@ -75,11 +75,12 @@ const doc = {
 const outputFile = './swagger.json';
 const endpointsFiles = ['./routes/movies.js']; // Add more route files if needed
 
-swaggerAutogen(outputFile, endpointsFiles).then(() => {
+// ✅ Pass `doc` explicitly so it's recognized as used
+swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
   console.log('✅ Swagger JSON file has been generated.');
 });
 
-// ✅ Export a setup function for `server.js`
+// ✅ Export `setupSwagger` function for Express
 const setupSwagger = (app) => {
   const swaggerUi = require('swagger-ui-express');
   const swaggerDocument = require('./swagger.json');
