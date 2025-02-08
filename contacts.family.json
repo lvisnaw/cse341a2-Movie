@@ -28,5 +28,25 @@
     "email": "jbvisnaw@gmail.com",
     "favoriteColor": "Turquoise Blue",
     "birthday": "2000-03-18"
+  },
+  {
+    "_id": {
+      "$oid": "679547435fe2f4b15fd487f5"
+    },
+    "firstName": "Cameron",
+    "lastName": "Visnaw",
+    "email": "crvisnaw@gmail.com",
+    "favoriteColor": "Purple",
+    "birthday": "2002-05-12"
+  },
+  {
+    "_id": {
+      "$oid": "679572ad83df4bc4ebf52577"
+    },
+    "firstName": "Landon",
+    "lastName": "Visnaw",
+    "email": "lsvisnaw@gmail.com",
+    "favoriteColor": "Purple",
+    "birthday": "2005-04-10"
   }
 ]
