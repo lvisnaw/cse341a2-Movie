@@ -1,16 +1,32 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "My Movies API",
+    "description": "API for managing my movie collection",
+    "version": "1.0.0"
   },
   "host": "localhost:3000",
   "basePath": "/",
+  "tags": [
+    {
+      "name": "Movies",
+      "description": "Endpoints for managing movies"
+    }
+  ],
   "schemes": [
     "http"
   ],
   "paths": {
+    "/test": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "description": "",
@@ -25,38 +41,6 @@
       },
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "genre": {
-                  "example": "any"
-                },
-                "releaseYear": {
-                  "example": "any"
-                },
-                "format": {
-                  "example": "any"
-                },
-                "director": {
-                  "example": "any"
-                },
-                "leadActors": {
-                  "example": "any"
-                },
-                "personalRating": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -132,6 +116,48 @@
           "500": {
             "description": "Internal Server Error"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Movie": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "The Secret Life of Walter Mitty"
+        },
+        "genre": {
+          "type": "string",
+          "example": "Adventure"
+        },
+        "releaseYear": {
+          "type": "number",
+          "example": 2013
+        },
+        "format": {
+          "type": "string",
+          "example": "Blu-ray"
+        },
+        "director": {
+          "type": "string",
+          "example": "Ben Stiller"
+        },
+        "leadActors": {
+          "type": "array",
+          "example": [
+            "Ben Stiller",
+            "Kristen Wiig",
+            "Sean Penn"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "personalRating": {
+          "type": "number",
+          "example": 8
         }
       }
     }
