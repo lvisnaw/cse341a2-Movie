@@ -68,11 +68,24 @@ const doc = {
     title: 'My Movies API',
     description: 'API for managing my movie collection',
   },
-  host: 'localhost:3000', // Change this to your Render URL when deployed
+  host: 'localhost:3000', // Change this when deployed
   schemes: ['http'], // Change to ['https'] when deployed
 };
 
 const outputFile = './swagger.json';
-const endpointsFiles = ['./routes/movies.js']; // Add more routes if needed
+const endpointsFiles = ['./routes/movies.js']; // Add more route files if needed
 
-swaggerAutogen(outputFile, endpointsFiles);
+swaggerAutogen(outputFile, endpointsFiles).then(() => {
+  console.log('✅ Swagger JSON file has been generated.');
+});
+
+// ✅ Export a setup function for `server.js`
+const setupSwagger = (app) => {
+  const swaggerUi = require('swagger-ui-express');
+  const swaggerDocument = require('./swagger.json');
+
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  console.log('📜 Swagger Docs available at /api-docs');
+};
+
+module.exports = setupSwagger;

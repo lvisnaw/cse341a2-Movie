@@ -58,22 +58,51 @@
 //     process.exit(1); // Exit the process if DB connection fails
 //   });
 
+// const express = require('express');
+// const connectDB = require('./db/connection');
+// const moviesRouter = require('./routes/movies');
+// const swaggerUi = require('swagger-ui-express');
+// const swaggerDocument = require('./swagger.json'); // Import Swagger JSON
+// const setupSwagger = require('./swagger');
+
+// const app = express();
+// const port = process.env.PORT || 3000;
+
+// app.use(express.json());
+// setupSwagger(app);
+
+// // ✅ Add Swagger UI at `/api-docs`
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+// connectDB()
+//   .then(() => {
+//     app.use('/api/movies', moviesRouter);
+
+//     app.listen(port, () => {
+//       console.log(`🚀 Server running at http://localhost:${port}/`);
+//       console.log(`📜 Swagger Docs available at http://localhost:${port}/api-docs`);
+//     });
+//   })
+//   .catch((err) => {
+//     console.error('❌ Failed to connect to MongoDB:', err);
+//     process.exit(1);
+//   });
+
 const express = require('express');
 const connectDB = require('./db/connection');
 const moviesRouter = require('./routes/movies');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json'); // Import Swagger JSON
-const setupSwagger = require('./swagger');
+const swaggerDocument = require('./swagger.json'); // ✅ Import Swagger JSON
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-setupSwagger(app);
 
-// ✅ Add Swagger UI at `/api-docs`
+// ✅ Setup Swagger at `/api-docs`
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// ✅ Connect to MongoDB first, then start the Express server
 connectDB()
   .then(() => {
     app.use('/api/movies', moviesRouter);
@@ -87,3 +116,4 @@ connectDB()
     console.error('❌ Failed to connect to MongoDB:', err);
     process.exit(1);
   });
+
