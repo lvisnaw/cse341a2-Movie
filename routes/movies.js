@@ -14,12 +14,13 @@ const Movie = require('../models/movie');
  *       200:
  *         description: Successfully retrieved movies.
  */
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {  // Add `next` here
   try {
+    // throw new Error('Test server error');  // Test error
     const movies = await Movie.find();
     res.json(movies);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    next(err);  // Pass the error to the global error handler
   }
 });
 
