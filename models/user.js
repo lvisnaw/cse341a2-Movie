@@ -2,8 +2,12 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: true }, // Hashed password
+  password: { type: String, required: true },
+  accountType: { 
+    type: String, 
+    enum: ['read', 'read-write', 'admin'], 
+    default: 'read' 
+  } // Added accountType for user roles
 });
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);
