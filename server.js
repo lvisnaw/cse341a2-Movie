@@ -23,7 +23,7 @@ app.use(errorHandler);
 connectDB()
   .then(() => {
     app.listen(port, () => {
-      console.log(`🚀 Server running at http://localhost:${port}/`);
+      console.log(`🚀 Server running at http://localhost:${port}/api-docs`);
     });
   })
   .catch((err) => {
