@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const router = express.Router();
-const JWT_SECRET = 'your_jwt_secret_key_here'; // Change this in production
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key_here'; // Uses environment variable or default
 
 /**
  * @openapi
