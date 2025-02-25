@@ -9,6 +9,22 @@ const options = {
       version: '1.0.0',
     },
     components: {
+      securitySchemes: {
+        OAuth2: {
+          type: 'oauth2',
+          description: 'OAuth 2.0 Authorization using Google.',
+          flows: {
+            authorizationCode: {
+              authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
+              tokenUrl: 'https://oauth2.googleapis.com/token',
+              scopes: {
+                profile: 'Access user\'s profile information',
+                email: 'Access user\'s email address',
+              },
+            },
+          },
+        },
+      },
       schemas: {
         Movie: {
           type: 'object',
@@ -33,7 +49,7 @@ const options = {
       },
     },
   },
-  apis: ['./routes/movies.js', './routes/users.js', './routes/auth.js'], // ✅ Added auth.js here
+  apis: ['./routes/movies.js', './routes/users.js', './routes/auth.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
@@ -81,7 +97,7 @@ module.exports = { setupSwagger };
 //       },
 //     },
 //   },
-//   apis: ['./routes/movies.js', './routes/users.js'], // ✅ Now scans both routes
+//   apis: ['./routes/movies.js', './routes/users.js', './routes/auth.js'], // ✅ Added auth.js here
 // };
 
 // const swaggerSpec = swaggerJsdoc(options);

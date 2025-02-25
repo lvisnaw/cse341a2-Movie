@@ -2,6 +2,22 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/user');
 
+/**
+ * @openapi
+ * components:
+ *   securitySchemes:
+ *     OAuth2:
+ *       type: oauth2
+ *       description: OAuth 2.0 Authorization using Google.
+ *       flows:
+ *         authorizationCode:
+ *           authorizationUrl: https://accounts.google.com/o/oauth2/auth
+ *           tokenUrl: https://oauth2.googleapis.com/token
+ *           scopes:
+ *             profile: Access user's profile information
+ *             email: Access user's email address
+ */
+
 passport.use(
   new GoogleStrategy(
     {
