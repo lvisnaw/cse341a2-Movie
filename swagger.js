@@ -24,13 +24,23 @@ const options = {
             },
           },
         },
+        BearerAuth: {  // ✅ Added JWT Bearer Token Authentication
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+          description: 'Enter your JWT token in the format: Bearer your_token_here'
+        }
       },
       schemas: {
         Movie: {
           type: 'object',
           properties: {
             title: { type: 'string', example: 'Movie Title' },
-            genre: { type: 'string', example: 'Genre' },
+            genre: { 
+              type: 'array', 
+              items: { type: 'string' }, 
+              example: ['Action', 'Sci-Fi'] 
+            },
             releaseYear: { type: 'integer', example: 2025 },
             format: { 
               type: 'string', 
@@ -44,12 +54,14 @@ const options = {
               example: ['Actor One', 'Actor Two'],
             },
             personalRating: { type: 'integer', example: 5 },
+            description: { type: 'string', example: 'A thrilling action-packed movie with a twist.' }
           },
         },
       },
     },
+    security: [{ BearerAuth: [] }],  // ✅ Apply Bearer Token Authentication globally
   },
-  apis: ['./routes/movies.js', './routes/users.js', './routes/auth.js'],
+  apis: ['./routes/movies.js', './routes/users.js', './routes/auth.js'], // ✅ Ensure all route files are included
 };
 
 const swaggerSpec = swaggerJsdoc(options);
@@ -73,6 +85,22 @@ module.exports = { setupSwagger };
 //       version: '1.0.0',
 //     },
 //     components: {
+//       securitySchemes: {
+//         OAuth2: {
+//           type: 'oauth2',
+//           description: 'OAuth 2.0 Authorization using Google.',
+//           flows: {
+//             authorizationCode: {
+//               authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
+//               tokenUrl: 'https://oauth2.googleapis.com/token',
+//               scopes: {
+//                 profile: 'Access user\'s profile information',
+//                 email: 'Access user\'s email address',
+//               },
+//             },
+//           },
+//         },
+//       },
 //       schemas: {
 //         Movie: {
 //           type: 'object',
@@ -97,7 +125,7 @@ module.exports = { setupSwagger };
 //       },
 //     },
 //   },
-//   apis: ['./routes/movies.js', './routes/users.js', './routes/auth.js'], // ✅ Added auth.js here
+//   apis: ['./routes/movies.js', './routes/users.js', './routes/auth.js'],
 // };
 
 // const swaggerSpec = swaggerJsdoc(options);
